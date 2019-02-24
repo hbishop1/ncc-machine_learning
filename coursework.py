@@ -32,8 +32,8 @@ shuffle=False, batch_size=16, drop_last=True)
 train_iterator = iter(cycle(train_loader))
 test_iterator = iter(cycle(test_loader))
 
-print(f'> Size of training dataset {len(train_loader.dataset)}')
-print(f'> Size of test dataset {len(test_loader.dataset)}')
+print('> Size of training dataset: ' len(train_loader.dataset))
+print('> Size of test dataset: ', len(test_loader.dataset))
 
 # plt.figure(figsize=(10,10))
 # for i in range(25):
