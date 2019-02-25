@@ -19,7 +19,9 @@ class_names = ['apple','aquarium_fish','baby','bear','beaver','bed','bee','beetl
 
 train_loader = torch.utils.data.DataLoader(
     torchvision.datasets.CIFAR100('data', train=True, download=True, transform=torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor()
+        torchvision.transforms.ToTensor(),
+        torchvision.transforms.RandomRotaion(30),
+        torchvision.transforms.RandomHorizontalFlip()
     ])),
 shuffle=True, batch_size=16, drop_last=True)
 
@@ -55,10 +57,13 @@ class Flatten(nn.Module):
 
 class MyNetwork(nn.Module):
     def __init__(self):
+        self.dropout_prob = 0.2
+
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
 
         layers.append(nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1))
+        #layers.append(nn.Dropout2d(p=self.dropout_prob))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(64))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
@@ -92,7 +97,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.00001, weight_decay=0.001)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00001, weight_decay=0.005)
 num_epochs = 500
 logs = {}
 #liveplot = PlotLosses()
