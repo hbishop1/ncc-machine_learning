@@ -23,6 +23,7 @@ train_loader = torch.utils.data.DataLoader(
         torchvision.transforms.RandomHorizontalFlip(),
         torchvision.transforms.ToTensor()
     ])),
+
 shuffle=True, batch_size=16, drop_last=True)
 
 test_loader = torch.utils.data.DataLoader(
@@ -98,7 +99,7 @@ print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vecto
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.00001, weight_decay=0.005)
-num_epochs = 500
+num_epochs = 3000
 logs = {}
 #liveplot = PlotLosses()
 
