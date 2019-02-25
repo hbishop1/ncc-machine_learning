@@ -32,7 +32,7 @@ shuffle=False, batch_size=16, drop_last=True)
 train_iterator = iter(cycle(train_loader))
 test_iterator = iter(cycle(test_loader))
 
-print('> Size of training dataset: ' len(train_loader.dataset))
+print('> Size of training dataset: ', len(train_loader.dataset))
 print('> Size of test dataset: ', len(test_loader.dataset))
 
 # plt.figure(figsize=(10,10))
@@ -72,10 +72,10 @@ class MyNetwork(nn.Module):
 
 N = MyNetwork().to(device)
 
-print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(N.parameters()))}')
+print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.SGD(N.parameters(), lr=0.01)
+optimiser = torch.optim.SGD(N.parameters(), lr=0.005, weight_decay=0.001)
 num_epochs = 200
 logs = {}
 #liveplot = PlotLosses()
@@ -166,4 +166,4 @@ for i in range(num_images):
     plt.subplot(num_rows, 2*num_cols, 2*i+1)
     plot_image(i, test_preds, test_labels.cpu(), test_images.cpu().squeeze().permute(1,3,2,0).contiguous().permute(3,2,1,0))
     plt.subplot(num_rows, 2*num_cols, 2*i+2)
-    plot_value_array(i, test_preds, test_labels)\
+    plot_value_array(i, test_preds, test_labels)
