@@ -1,4 +1,3 @@
-from __future__ import print_function
 import math
 import numpy as np
 import torch
@@ -58,10 +57,14 @@ class MyNetwork(nn.Module):
     def __init__(self):
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
-        layers.append(nn.Conv2d(3, 18, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
+        layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
+        layers.append(nn.Conv2d(32, 16, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
         layers.append(Flatten())
-        layers.append(nn.Linear(in_features=18*16*16, out_features=512))
+        layers.append(nn.Linear(in_features=16*8*8, out_features=512))
         layers.append(nn.ReLU())
         layers.append(nn.Linear(in_features=512, out_features=100))
         self.layers = layers
@@ -76,8 +79,8 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.002, weight_decay=0.005)
-num_epochs = 300
+optimiser = torch.optim.Adam(N.parameters(), lr=0.001, weight_decay=0.002)
+num_epochs = 50
 logs = {}
 #liveplot = PlotLosses()
 
