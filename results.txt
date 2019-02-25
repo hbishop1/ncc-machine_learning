@@ -1,0 +1,1 @@
+Epoch 2/50Train Loss: 3.7393 Train Acc: 0.1208Test Loss: 3.6169 Test Acc: 0.1447
