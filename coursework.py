@@ -79,7 +79,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.001, weight_decay=0.002)
+optimiser = torch.optim.SGD(N.parameters(), lr=0.001, weight_decay=0.002,momentum=0.9)
 num_epochs = 50
 logs = {}
 #liveplot = PlotLosses()
