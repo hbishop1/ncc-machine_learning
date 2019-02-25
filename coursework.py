@@ -57,16 +57,19 @@ class MyNetwork(nn.Module):
     def __init__(self):
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
-        layers.append(nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
+        layers.append(nn.BatchNorm2d(64))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
-        layers.append(nn.Conv2d(32, 16, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(64, 32, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
+        layers.append(nn.BatchNorm2d(32))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
         layers.append(Flatten())
-        layers.append(nn.Linear(in_features=16*8*8, out_features=512))
+        layers.append(nn.Linear(in_features=32*8*8, out_features=256))
         layers.append(nn.ReLU())
-        layers.append(nn.Linear(in_features=512, out_features=100))
+        layers.append(nn.BatchNorm1d(256))
+        layers.append(nn.Linear(in_features=256, out_features=100))
         self.layers = layers
 
     def forward(self, x):
@@ -79,7 +82,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.001, weight_decay=0.01)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.001, weight_decay=0.005)
 num_epochs = 300
 logs = {}
 #liveplot = PlotLosses()
