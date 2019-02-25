@@ -70,6 +70,7 @@ class MyNetwork(nn.Module):
         self.layers = layers
 
     def forward(self, x):
+        print(x.size())
         for m in self.layers:
             x = m(x)
         return x
@@ -79,7 +80,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.SGD(N.parameters(), lr=0.0005, weight_decay=0.004,momentum=0.9)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.001, weight_decay=0.01)
 num_epochs = 300
 logs = {}
 #liveplot = PlotLosses()
