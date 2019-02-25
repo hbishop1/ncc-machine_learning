@@ -11,4 +11,4 @@
 source /etc/profile
 module load cuda/8.0
 
-stdbuf -oL env/bin/python ./coursework.py
+stdbuf -oL env/bin/python coursework.py
