@@ -1,3 +1,4 @@
+from __future__ import print_function
 import math
 import numpy as np
 import torch
@@ -75,7 +76,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.SGD(N.parameters(), lr=0.002, weight_decay=0.005, momentum=0.9)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.002, weight_decay=0.005)
 num_epochs = 300
 logs = {}
 #liveplot = PlotLosses()
