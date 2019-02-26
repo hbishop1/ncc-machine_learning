@@ -86,12 +86,11 @@ class MyNetwork(nn.Module):
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
-        #layers.append(nn.Dropout(p=0.3))
 
         layers.append(nn.Linear(in_features=128*4*4, out_features=256))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm1d(256))
-        #layers.append(nn.Dropout(p=0.3))
+        layers.append(nn.Dropout(p=0.3))
 
         layers.append(nn.Linear(in_features=256, out_features=100))
 
