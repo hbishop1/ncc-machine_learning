@@ -58,35 +58,40 @@ class Flatten(nn.Module):
 
 class MyNetwork(nn.Module):
     def __init__(self):
-        self.dropout_prob = 0.2
 
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
 
-        layers.append(nn.Conv2d(3, 64, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(64))
-        layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
-
-        layers.append(nn.Conv2d(64, 128, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
+
+        layers.append(nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
+        layers.append(nn.BatchNorm2d(256))
+        layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
+
+        layers.append(nn.Conv2d(256, 256, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
+        layers.append(nn.BatchNorm2d(256))
+
+        layers.append(nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
+        layers.append(nn.BatchNorm2d(128))
 
         layers.append(nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))
-
-        layers.append(nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(64))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
+        layers.append(nn.Dropout(p=0.3))
 
-        layers.append(nn.Linear(in_features=64*4*4, out_features=256))
+        layers.append(nn.Linear(in_features=128*4*4, out_features=256))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm1d(256))
+        layers.append(nn.Dropout(p=0.3))
 
         layers.append(nn.Linear(in_features=256, out_features=100))
 
@@ -102,7 +107,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.0001, weight_decay=0.005)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.0005, weight_decay=0.005)
 num_epochs = 3000
 logs = {}
 #liveplot = PlotLosses()
