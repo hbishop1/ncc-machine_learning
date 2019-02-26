@@ -3,7 +3,7 @@
 #SBATCH -N 1
 #SBATCH -c 1
 
-#SBATCH --gres=gpu:1
+#SBATCH --gres=gpu:2
 #SBATCH --qos="short"
 #SBATCH -p "ug-gpu-small"
 #SBATCH -t 02-00
