@@ -5,7 +5,6 @@ import torch.nn as nn
 import torch.nn.functional as F
 import torchvision
 import matplotlib.pyplot as plt
-from livelossplot import PlotLosses
 
 device = torch.device('cuda') if torch.cuda.is_available() else torch.device('cpu')
 
@@ -85,7 +84,6 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
 epoch = 0
-liveplot = PlotLosses()
 
 example_1 = torchvision.transforms.ToTensor()(test_loader.dataset.test_data[13]).to(device)  # horse
 example_2 = torchvision.transforms.ToTensor()(test_loader.dataset.test_data[160]).to(device) # bird
@@ -98,6 +96,7 @@ bad_pegasus = N.decode(0.9*example_1_code + 0.1*example_2_code).squeeze(0)
 
 plt.grid(False)
 plt.imshow(bad_pegasus.cpu().data.permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
+plt.show()
 
 #for i in range(len(test_loader.dataset.test_labels)):
 #  print(class_names[test_loader.dataset.test_labels[i]] + '\t idx: ' + str(i))
