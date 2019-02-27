@@ -86,7 +86,6 @@ class MyNetwork(nn.Module):
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
-        layers.append(nn.Dropout(p=0.3))
 
         layers.append(nn.Linear(in_features=128*4*4, out_features=256))
         layers.append(nn.ReLU())
@@ -107,7 +106,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.0001, weight_decay=0.01)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00001, weight_decay=0.0001)
 num_epochs = 3000
 logs = {}
 #liveplot = PlotLosses()
