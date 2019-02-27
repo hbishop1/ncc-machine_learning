@@ -96,7 +96,6 @@ bad_pegasus = N.decode(0.9*example_1_code + 0.1*example_2_code).squeeze(0)
 
 plt.grid(False)
 plt.imshow(bad_pegasus.cpu().data.permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
-plt.show()
 
 #for i in range(len(test_loader.dataset.test_labels)):
 #  print(class_names[test_loader.dataset.test_labels[i]] + '\t idx: ' + str(i))
