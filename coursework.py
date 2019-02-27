@@ -89,7 +89,7 @@ class MyNetwork(nn.Module):
 
         layers.append(nn.Linear(in_features=128*8*8, out_features=512))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm1d(256))
+        layers.append(nn.BatchNorm1d(512))
         layers.append(nn.Dropout(p=0.5))
 
         layers.append(nn.Linear(in_features=512, out_features=100))
