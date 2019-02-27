@@ -110,7 +110,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.0005)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.001)
 num_epochs = 3000
 logs = {}
 #liveplot = PlotLosses()
@@ -152,7 +152,7 @@ for epoch in range(1,num_epochs+1):
         test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
         test_acc_arr = np.append(test_acc_arr, pred.data.eq(t.view_as(pred)).float().mean().item())
 
-    with open('results.txt','w') as results:
+    with open('results1.txt','w') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} Train Acc: {:.4f} \n'.format(train_loss_arr.mean(),train_acc_arr.mean()))
         results.write('Test Loss: {:.4f} Test Acc: {:.4f} \n'.format(test_loss_arr.mean(),test_acc_arr.mean()))
