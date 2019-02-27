@@ -162,7 +162,7 @@ for epoch in range(1,num_epochs+1):
     print('Test Loss: {:.4f} Test Acc: {:.4f}'.format(test_loss_arr.mean(),test_acc_arr.mean()))
 
     logs['train_acc'].append(train_acc_arr.mean())
-    logs['train_loss'].appen(train_loss_arr.mean())
+    logs['train_loss'].append(train_loss_arr.mean())
     logs['test_acc'].append(test_acc_arr.mean())
     logs['test_loss'].append(test_loss_arr.mean())
 
