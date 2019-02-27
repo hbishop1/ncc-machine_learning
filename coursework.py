@@ -39,16 +39,16 @@ test_iterator = iter(cycle(test_loader))
 print('> Size of training dataset: ', len(train_loader.dataset))
 print('> Size of test dataset: ', len(test_loader.dataset))
 
-plt.figure(figsize=(10,10))
-for i in range(25):
-    plt.subplot(5,5,i+1)
-    plt.xticks([])
-    plt.yticks([])
-    plt.grid(False)
-    plt.imshow(train_loader.dataset[i][0].permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
-    plt.xlabel(class_names[train_loader.dataset[i][1]])
+# plt.figure(figsize=(10,10))
+# for i in range(25):
+#     plt.subplot(5,5,i+1)
+#     plt.xticks([])
+#     plt.yticks([])
+#     plt.grid(False)
+#     plt.imshow(train_loader.dataset[i][0].permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
+#     plt.xlabel(class_names[train_loader.dataset[i][1]])
 
-plt.show()
+# plt.show()
 
 # define the model (a simple classifier)
 
@@ -110,9 +110,9 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.001)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.005)
 num_epochs = 3000
-logs = {}
+logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
 for epoch in range(1,num_epochs+1):
@@ -161,8 +161,10 @@ for epoch in range(1,num_epochs+1):
     print('Train Loss: {:.4f} Train Acc: {:.4f}'.format(train_loss_arr.mean(),train_acc_arr.mean()))
     print('Test Loss: {:.4f} Test Acc: {:.4f}'.format(test_loss_arr.mean(),test_acc_arr.mean()))
 
-    logs['train_acc'],logs['train_loss'] = train_acc_arr.mean(),train_loss_arr.mean()
-    logs['test_acc'],logs['test_loss'] = test_acc_arr.mean(),test_loss_arr.mean()
+    logs['train_acc'].append(train_acc_arr.mean())
+    logs['train_loss'].appen(train_loss_arr.mean())
+    logs['test_acc'].append(test_acc_arr.mean())
+    logs['test_loss'].append(test_loss_arr.mean())
 
     with open('logs.p', 'wb') as fp:
         pickle.dump(logs, fp)
