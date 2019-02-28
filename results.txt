@@ -1,3 +1,0 @@
-Epoch 13/3000 
-Train Loss: 2.8429 Train Acc: 0.3176 
-Test Loss: 2.7833 Test Acc: 0.3327 
