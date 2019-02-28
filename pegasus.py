@@ -132,12 +132,11 @@ for epoch in range(1,num_epochs+1):
 
     epoch = epoch+1
 
-for p in range(10):
-    with torch.no_grad():
-        sample = torch.randn(64, 20).to(device)
-        sample = N.decode(sample).cpu()
-        save_image(sample.view(64, 3, 32, 32),
-            'pegasus_{}.png'.format(p))
+with torch.no_grad():
+    sample = torch.randn(64, 20).to(device)
+    sample = N.decode(sample).cpu()
+    save_image(sample.view(64, 3, 32, 32),
+        'pegasus_{}.png'.format(p))
 
 #for i in range(len(test_loader.dataset.test_labels)):
 #  print(class_names[test_loader.dataset.test_labels[i]] + '\t idx: ' + str(i))

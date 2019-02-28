@@ -103,11 +103,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm1d(4096))
 
-        layers.append(nn.Linear(in_features=4096, out_features=1024))
-        layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm1d(1024))
-
-        layers.append(nn.Linear(in_features=1024, out_features=100))
+        layers.append(nn.Linear(in_features=4096, out_features=100))
 
         self.layers = layers
 
