@@ -23,7 +23,7 @@ cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transfor
 
 indecies=[]
 for i in range(len(cifar)):
-    if cifar[i][1] in [2,7]:
+    if cifar[i][1] in [7]:
         indecies.append(i)
 
 dataset = torch.utils.data.Subset(cifar,indecies)
@@ -36,15 +36,17 @@ print(f'> Size of training dataset {len(train_loader.dataset)}')
 
 
 class VAE(nn.Module):
-    def __init__(self, intermediate_size=128, hidden_size=20):
+    def __init__(self, intermediate_size=256, hidden_size=20):
         super(VAE, self).__init__()
 
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
+
         # encoder
-        self.conv1 = nn.Conv2d(3, 3, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv2d(3, 32, kernel_size=2, stride=2, padding=0)
-        self.conv3 = nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=1)
-        self.conv4 = nn.Conv2d(32, 32, kernel_size=3, stride=1, padding=1)
-        self.fc1 = nn.Linear(16 * 16 * 32, intermediate_size)
+        self.conv1 = nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
+        self.conv3 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
+        self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
+        self.fc1 = nn.Linear(8 * 8 * 64, intermediate_size)
 
         # latent space
         self.fc21 = nn.Linear(intermediate_size, hidden_size)
@@ -52,17 +54,18 @@ class VAE(nn.Module):
 
         # decoder
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
-        self.fc4 = nn.Linear(intermediate_size, 8192)
-        self.deconv1 = nn.ConvTranspose2d(32, 32, kernel_size=3, stride=1, padding=1)
-        self.deconv2 = nn.ConvTranspose2d(32, 32, kernel_size=3, stride=1, padding=1)
-        self.deconv3 = nn.ConvTranspose2d(32, 32, kernel_size=2, stride=2, padding=0)
-        self.conv5 = nn.Conv2d(32, 3, kernel_size=3, stride=1, padding=1)
+        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 32)
+        self.deconv1 = nn.ConvTranspose2d(32, 64, kernel_size=3, stride=1, padding=1)
+        self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
+        self.conv5 = nn.Conv2d(128, 3, kernel_size=3, stride=1, padding=1)
 
     def encode(self, x):
         out = F.relu(self.conv1(x))
         out = F.relu(self.conv2(out))
         out = F.relu(self.conv3(out))
         out = F.relu(self.conv4(out))
+        out = self.pool(out)
         out = out.view(out.size(0), -1)
         h1  = F.relu(self.fc1(out))
         return self.fc21(h1), self.fc22(h1)
@@ -97,7 +100,7 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
-num_epochs = 5
+num_epochs = 50
 
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
@@ -110,6 +113,8 @@ def vae_loss(p, x, mu, logvar):
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
     return BCE + KLD
+
+open('results_pegasus.txt','w').close()
 
 # training loop, feel free to also train on the test dataset if you like
 for epoch in range(1,num_epochs+1):
@@ -136,6 +141,10 @@ for epoch in range(1,num_epochs+1):
         train_loss_arr = np.append(train_loss_arr, loss.cpu().data)
 
     print('Train Loss: {:.4f}'.format(train_loss_arr.mean()))
+
+    with open('results_pegasus.txt','a') as results:
+        results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
+        results.write('Train Loss: {:.4f} \n'.format(train_loss_arr.mean()))
 
     epoch = epoch+1
 
