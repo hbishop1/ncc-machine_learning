@@ -17,11 +17,18 @@ def cycle(iterable):
 
 class_names = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
 
-train_loader = torch.utils.data.DataLoader(
-    torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
+cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
         torchvision.transforms.ToTensor()
-    ])),
-shuffle=True, batch_size=16, drop_last=True)
+    ]))
+
+indecies=[]
+for i in range(len(cifar)):
+    if cifar[i][1] in [2,7]:
+        indecies.append(i)
+
+dataset = torch.utils.data.Subset(cifar,indecies)
+
+train_loader = torch.utils.data.DataLoader(dataset,shuffle=True, batch_size=16, drop_last=True)
 
 train_iterator = iter(cycle(train_loader))
 
@@ -135,8 +142,7 @@ for epoch in range(1,num_epochs+1):
 with torch.no_grad():
     sample = torch.randn(64, 20).to(device)
     sample = N.decode(sample).cpu()
-    save_image(sample.view(64, 3, 32, 32),
-        'pegasus_{}.png'.format(p))
+    save_image(sample.view(64, 3, 32, 32),'pegasus.png')
 
 #for i in range(len(test_loader.dataset.test_labels)):
 #  print(class_names[test_loader.dataset.test_labels[i]] + '\t idx: ' + str(i))

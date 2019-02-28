@@ -19,8 +19,10 @@ class_names = ['apple','aquarium_fish','baby','bear','beaver','bed','bee','beetl
 
 train_loader = torch.utils.data.DataLoader(
     torchvision.datasets.CIFAR100('data', train=True, download=True, transform=torchvision.transforms.Compose([
+        torchvision.transforms.RandomAffine(20),
         torchvision.transforms.RandomRotation(30),
         torchvision.transforms.RandomHorizontalFlip(),
+        torchvision.transforms.ColorJitter(hue=.1, saturation=.1),
         torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ])),
@@ -39,16 +41,16 @@ test_iterator = iter(cycle(test_loader))
 print('> Size of training dataset: ', len(train_loader.dataset))
 print('> Size of test dataset: ', len(test_loader.dataset))
 
-# plt.figure(figsize=(10,10))
-# for i in range(25):
-#     plt.subplot(5,5,i+1)
-#     plt.xticks([])
-#     plt.yticks([])
-#     plt.grid(False)
-#     plt.imshow(train_loader.dataset[i][0].permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
-#     plt.xlabel(class_names[train_loader.dataset[i][1]])
+plt.figure(figsize=(10,10))
+for i in range(25):
+    plt.subplot(5,5,i+1)
+    plt.xticks([])
+    plt.yticks([])
+    plt.grid(False)
+    plt.imshow(train_loader.dataset[i][0].permute(0,2,1).contiguous().permute(2,1,0), cmap=plt.cm.binary)
+    plt.xlabel(class_names[train_loader.dataset[i][1]])
 
-# plt.show()
+plt.show()
 
 # define the model (a simple classifier)
 
@@ -117,7 +119,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.01)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.005)
 num_epochs = 3000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
