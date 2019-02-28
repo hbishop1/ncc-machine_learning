@@ -84,18 +84,18 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))     
 
-        layers.append(nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(128))
-        layers.append(nn.MaxPool2d(kernel_size=5, stride=4, padding=0))
+        layers.append(nn.BatchNorm2d(64))
+        layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
 
-        layers.append(nn.Linear(in_features=128*8*8, out_features=1024))
+        layers.append(nn.Linear(in_features=64*16*16, out_features=2048))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm1d(1024))
+        layers.append(nn.BatchNorm1d(2048))
 
-        layers.append(nn.Linear(in_features=1024, out_features=100))
+        layers.append(nn.Linear(in_features=2048, out_features=100))
 
         self.layers = layers
 
