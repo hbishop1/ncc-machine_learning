@@ -34,7 +34,7 @@ for dset in [cifar_train,cifar_test]:
     lst.append(indecies)
 
 train_dataset = torch.utils.data.Subset(cifar_train,lst[0])
-test_dataset = torch.utils.data.Subset(cifar_test,indecies)
+test_dataset = torch.utils.data.Subset(cifar_test,lst[1])
 
 train_loader = torch.utils.data.DataLoader(train_dataset,shuffle=True, batch_size=16, drop_last=True)
 test_loader = torch.utils.data.DataLoader(test_dataset,shuffle=False, batch_size=16, drop_last=True)
