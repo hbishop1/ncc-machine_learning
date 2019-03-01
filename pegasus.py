@@ -15,22 +15,32 @@ def cycle(iterable):
         for x in iterable:
             yield x
 
-cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
+cifar_train = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
         torchvision.transforms.RandomHorizontalFlip(),
         torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ]))
 
+cifar_test = torchvision.datasets.CIFAR10('data', train=False, download=True, transform=torchvision.transforms.Compose([
+        torchvision.transforms.ToTensor()
+    ]))
+
 indecies=[]
-for i in range(len(cifar)):
-    if cifar[i][1] in [7]:
-        indecies.append(i)
+lst = []
+for dset in [cifar_train,cifar_test]:
+    for i in range(len(dset)):
+        if dset[i][1] in [7]:
+            indecies.append(i)
+    lst.append(indecies)
 
-dataset = torch.utils.data.Subset(cifar,indecies)
+train_dataset = torch.utils.data.Subset(cifar_train,lst[0])
+test_dataset = torch.utils.data.Subset(cifar_test,indecies)
 
-train_loader = torch.utils.data.DataLoader(dataset,shuffle=True, batch_size=16, drop_last=True)
+train_loader = torch.utils.data.DataLoader(train_dataset,shuffle=True, batch_size=16, drop_last=True)
+test_loader = torch.utils.data.DataLoader(test_dataset,shuffle=True, batch_size=16, drop_last=True)
 
 train_iterator = iter(cycle(train_loader))
+test_iterator = iter(cycle(train_loader))
 
 print(f'> Size of training dataset {len(train_loader.dataset)}')
 
@@ -125,6 +135,7 @@ for epoch in range(1,num_epochs+1):
     # arrays for metrics
     logs = {}
     train_loss_arr = np.zeros(0)
+    test_loss_arr = np.zeros(0)
 
     # iterate over some of the train dateset
     for i in range(1000):
@@ -140,7 +151,17 @@ for epoch in range(1,num_epochs+1):
 
         train_loss_arr = np.append(train_loss_arr, loss.cpu().data)
 
+    for x,t in test_loader:
+        x,t = x.to(device), t.to(device)
+
+        p, mu, logvar = N(x)
+        loss = vae_loss(p, x, mu, logvar)
+        pred = p.argmax(dim=1, keepdim=True)
+
+        test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
+
     print('Train Loss: {:.4f}'.format(train_loss_arr.mean()))
+    print('Test Loss: {:.4f}'.format(test_loss_arr.mean()))
 
     with open('results_pegasus.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
