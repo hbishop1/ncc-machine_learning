@@ -67,7 +67,7 @@ class VAE(nn.Module):
         out = F.relu(self.conv2(out))
         out = F.relu(self.conv3(out))
         out = F.relu(self.conv4(out))
-        out,idx = self.pool(out)
+        out = self.pool(out)
         out = out.view(out.size(0), -1)
         h1  = F.relu(self.fc1(out))
         return self.fc21(h1), self.fc22(h1)
