@@ -16,8 +16,6 @@ def cycle(iterable):
             yield x
 
 cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
-        torchvision.transforms.RandomAffine(15),
-        torchvision.transforms.RandomRotation(30),
         torchvision.transforms.RandomHorizontalFlip(),
         torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
