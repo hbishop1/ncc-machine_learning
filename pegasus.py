@@ -56,7 +56,7 @@ class VAE(nn.Module):
 
         # decoder
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
-        self.fc4 = nn.Linear(intermediate_size, 8 * 8 * 64)
+        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 64)
         self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=3, stride=1, padding=1)
         self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
         self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
@@ -83,7 +83,7 @@ class VAE(nn.Module):
     def decode(self, z):
         h3  = F.relu(self.fc3(z))
         out = F.relu(self.fc4(h3))
-        out = out.view(out.size(0), 64, 8, 8)
+        out = out.view(out.size(0), 64, 16, 16)
         out = F.relu(self.deconv1(out))
         out = F.relu(self.deconv2(out))
         out = F.relu(self.deconv3(out))
