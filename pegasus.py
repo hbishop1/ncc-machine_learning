@@ -25,9 +25,9 @@ cifar_test = torchvision.datasets.CIFAR10('data', train=False, download=True, tr
         torchvision.transforms.ToTensor()
     ]))
 
-indecies=[]
 lst = []
 for dset in [cifar_train,cifar_test]:
+    indecies=[]
     for i in range(len(dset)):
         if dset[i][1] in [7]:
             indecies.append(i)
