@@ -16,6 +16,10 @@ def cycle(iterable):
             yield x
 
 cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
+        torchvision.transforms.RandomAffine(15),
+        torchvision.transforms.RandomRotation(30),
+        torchvision.transforms.RandomHorizontalFlip(),
+        torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ]))
 
@@ -37,13 +41,13 @@ class VAE(nn.Module):
     def __init__(self, intermediate_size=256, hidden_size=20):
         super(VAE, self).__init__()
 
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
 
         # encoder
         self.conv1 = nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1)
         self.conv2 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
         self.conv3 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
         self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
+        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
         self.fc1 = nn.Linear(8 * 8 * 64, intermediate_size)
 
         # latent space
@@ -52,8 +56,8 @@ class VAE(nn.Module):
 
         # decoder
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
-        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 32)
-        self.deconv1 = nn.ConvTranspose2d(32, 64, kernel_size=3, stride=1, padding=1)
+        self.fc4 = nn.Linear(intermediate_size, 8 * 8 * 64)
+        self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=3, stride=1, padding=1)
         self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
         self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
         self.conv5 = nn.Conv2d(128, 3, kernel_size=3, stride=1, padding=1)
@@ -63,7 +67,7 @@ class VAE(nn.Module):
         out = F.relu(self.conv2(out))
         out = F.relu(self.conv3(out))
         out = F.relu(self.conv4(out))
-        out = self.pool(out)
+        out,idx = self.pool(out)
         out = out.view(out.size(0), -1)
         h1  = F.relu(self.fc1(out))
         return self.fc21(h1), self.fc22(h1)

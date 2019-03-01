@@ -19,10 +19,10 @@ class_names = ['apple','aquarium_fish','baby','bear','beaver','bed','bee','beetl
 
 train_loader = torch.utils.data.DataLoader(
     torchvision.datasets.CIFAR100('data', train=True, download=True, transform=torchvision.transforms.Compose([
-        torchvision.transforms.RandomAffine(20),
+        torchvision.transforms.RandomAffine(15),
         torchvision.transforms.RandomRotation(30),
         torchvision.transforms.RandomHorizontalFlip(),
-        torchvision.transforms.ColorJitter(hue=.1, saturation=.1),
+        torchvision.transforms.ColorJitter(hue=.05, saturation=.05),
         torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ])),
@@ -120,7 +120,7 @@ print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vecto
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.00003, weight_decay=0.005)
-num_epochs = 3000
+num_epochs = 1000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
