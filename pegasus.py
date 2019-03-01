@@ -52,9 +52,9 @@ class VAE(nn.Module):
 
         # encoder
         self.conv1 = nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1)
-        self.conv2 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
-        self.conv3 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
-        self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
+        self.conv2 = nn.Conv2d(128, 256, kernel_size=2, stride=2, padding=0)
+        self.conv3 = nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1)
+        self.conv4 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
         self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
         self.fc1 = nn.Linear(8 * 8 * 64, intermediate_size)
 
@@ -65,9 +65,9 @@ class VAE(nn.Module):
         # decoder
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
         self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 64)
-        self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=3, stride=1, padding=1)
-        self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
-        self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
+        self.deconv1 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
+        self.deconv2 = nn.ConvTranspose2d(128, 256, kernel_size=3, stride=1, padding=1)
+        self.deconv3 = nn.ConvTranspose2d(256, 128, kernel_size=2, stride=2, padding=0)
         self.conv5 = nn.Conv2d(128, 3, kernel_size=3, stride=1, padding=1)
 
     def encode(self, x):
