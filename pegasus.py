@@ -110,7 +110,7 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
-num_epochs = 200
+num_epochs = 100
 
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
@@ -165,7 +165,7 @@ for epoch in range(1,num_epochs+1):
     with open('results_pegasus.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} \n'.format(train_loss_arr.mean()))
-        results.write('Test Loss: {:.4f}'.format(test_loss_arr.mean()))
+        results.write('Test Loss: {:.4f} \n'.format(test_loss_arr.mean()))
 
     epoch = epoch+1
 
