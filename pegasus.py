@@ -83,7 +83,7 @@ class VAE(nn.Module):
     def decode(self, z):
         h3  = F.relu(self.fc3(z))
         out = F.relu(self.fc4(h3))
-        out = out.view(out.size(0), 32, 16, 16)
+        out = out.view(out.size(0), 64, 8, 8)
         out = F.relu(self.deconv1(out))
         out = F.relu(self.deconv2(out))
         out = F.relu(self.deconv3(out))
