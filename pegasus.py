@@ -165,6 +165,7 @@ for epoch in range(1,num_epochs+1):
     with open('results_pegasus.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} \n'.format(train_loss_arr.mean()))
+        results.write('Test Loss: {:.4f}'.format(test_loss_arr.mean()))
 
     epoch = epoch+1
 
