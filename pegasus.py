@@ -37,7 +37,7 @@ train_dataset = torch.utils.data.Subset(cifar_train,lst[0])
 test_dataset = torch.utils.data.Subset(cifar_test,indecies)
 
 train_loader = torch.utils.data.DataLoader(train_dataset,shuffle=True, batch_size=16, drop_last=True)
-test_loader = torch.utils.data.DataLoader(test_dataset,shuffle=True, batch_size=16, drop_last=True)
+test_loader = torch.utils.data.DataLoader(test_dataset,shuffle=False, batch_size=16, drop_last=True)
 
 train_iterator = iter(cycle(train_loader))
 test_iterator = iter(cycle(train_loader))
@@ -156,7 +156,6 @@ for epoch in range(1,num_epochs+1):
 
         p, mu, logvar = N(x)
         loss = vae_loss(p, x, mu, logvar)
-        pred = p.argmax(dim=1, keepdim=True)
 
         test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
 
