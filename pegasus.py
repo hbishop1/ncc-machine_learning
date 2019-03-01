@@ -15,8 +15,6 @@ def cycle(iterable):
         for x in iterable:
             yield x
 
-class_names = ['airplane', 'car', 'bird', 'cat', 'deer', 'dog', 'frog', 'horse', 'ship', 'truck']
-
 cifar = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
         torchvision.transforms.ToTensor()
     ]))
@@ -99,7 +97,7 @@ N = VAE().to(device)
 print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(N.parameters()))}')
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.0001)
 num_epochs = 50
 
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
