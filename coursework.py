@@ -19,8 +19,8 @@ class_names = ['apple','aquarium_fish','baby','bear','beaver','bed','bee','beetl
 
 train_loader = torch.utils.data.DataLoader(
     torchvision.datasets.CIFAR100('data', train=True, download=True, transform=torchvision.transforms.Compose([
+        torchvision.transforms.RandomRotation(20),
         torchvision.transforms.RandomHorizontalFlip(),
-        torchvision.transforms.ColorJitter(hue=.05, saturation=.05),
         torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ])),
