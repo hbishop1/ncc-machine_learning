@@ -84,7 +84,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
-        layers.append(nn.Conv2d(384, 256, kernel_size=2, stride=1, padding=1))
+        layers.append(nn.Conv2d(384, 256, kernel_size=2, stride=1, padding=0))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(256))
 
@@ -122,7 +122,7 @@ num_epochs = 1000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
-open('results.txt','w').close()
+open('results1.txt','w').close()
 
 
 for epoch in range(1,num_epochs+1):
