@@ -63,11 +63,11 @@ class MyNetwork(nn.Module):
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
 
-        layers.append(nn.Conv2d(3, 256, kernel_size=5, stride=1, padding=2))
+        layers.append(nn.Conv2d(3, 256, kernel_size=7, stride=1, padding=3))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(256))
 
-        layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(256, 384, kernel_size=5, stride=1, padding=2))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
@@ -88,7 +88,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(256))
 
-        layers.append(nn.Conv2d(256, 128, kernel_size=2, stride=1, padding=1))
+        layers.append(nn.Conv2d(256, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))     
 
