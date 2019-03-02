@@ -67,7 +67,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(256))
 
-        layers.append(nn.Conv2d(256, 384, kernel_size=2, stride=1, padding=1))
+        layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
@@ -75,7 +75,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
-        layers.append(nn.Conv2d(384, 384, kernel_size=2, stride=1, padding=1))
+        layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
@@ -84,7 +84,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
-        layers.append(nn.Conv2d(384, 256, kernel_size=2, stride=1, padding=0))
+        layers.append(nn.Conv2d(384, 256, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(256))
 
@@ -92,7 +92,7 @@ class MyNetwork(nn.Module):
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))     
 
-        layers.append(nn.Conv2d(128, 128, kernel_size=2, stride=1, padding=1))
+        layers.append(nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(128))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
