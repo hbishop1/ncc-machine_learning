@@ -63,8 +63,12 @@ class MyNetwork(nn.Module):
         super(MyNetwork, self).__init__()
         layers = nn.ModuleList()
 
-        layers.append(nn.Conv2d(3, 256, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
+        layers.append(nn.BatchNorm2d(128))
+
+        layers.append(nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(256))
 
         layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
@@ -74,32 +78,28 @@ class MyNetwork(nn.Module):
         layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
-
-        layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(384))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm2d(384))
 
-        layers.append(nn.Conv2d(384, 256, kernel_size=1, stride=1, padding=0))
+        layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(256))
+        layers.append(nn.BatchNorm2d(384))
 
-        layers.append(nn.Conv2d(256, 128, kernel_size=1, stride=1, padding=0))
+        layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(128))     
+        layers.append(nn.BatchNorm2d(384))     
 
-        layers.append(nn.Conv2d(128, 128, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.ReLU())
-        layers.append(nn.BatchNorm2d(128))
+        layers.append(nn.BatchNorm2d(384))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
 
-        layers.append(nn.Linear(in_features=128*8*8, out_features=2048))
+        layers.append(nn.Linear(in_features=384*8*8, out_features=2048))
         layers.append(nn.ReLU())
         layers.append(nn.BatchNorm1d(2048))
 
