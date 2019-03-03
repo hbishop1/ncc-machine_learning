@@ -64,43 +64,43 @@ class MyNetwork(nn.Module):
         layers = nn.ModuleList()
 
         layers.append(nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(128))
 
         layers.append(nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(256))
 
         layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(384))
 
         layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(384))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(nn.Conv2d(384, 512, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(512))
 
         layers.append(nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(512))
 
         layers.append(nn.Conv2d(512, 1024, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(1024))     
 
         layers.append(nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm2d(1024))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
 
         layers.append(nn.Linear(in_features=1024*8*8, out_features=2048))
-        layers.append(nn.ReLU())
+        layers.append(nn.ELU())
         layers.append(nn.BatchNorm1d(2048))
 
         layers.append(nn.Linear(in_features=2048, out_features=100))
@@ -122,7 +122,7 @@ num_epochs = 1000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
-open('results1.txt','w').close()
+open('results2.txt','w').close()
 
 
 for epoch in range(1,num_epochs+1):
@@ -162,7 +162,7 @@ for epoch in range(1,num_epochs+1):
         test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
         test_acc_arr = np.append(test_acc_arr, pred.data.eq(t.view_as(pred)).float().mean().item())
 
-    with open('results1.txt','a') as results:
+    with open('results2.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} Train Acc: {:.4f} \n'.format(train_loss_arr.mean(),train_acc_arr.mean()))
         results.write('Test Loss: {:.4f} Test Acc: {:.4f} \n'.format(test_loss_arr.mean(),test_acc_arr.mean()))
