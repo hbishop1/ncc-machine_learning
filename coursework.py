@@ -101,7 +101,7 @@ class MyNetwork(nn.Module):
 
         layers.append(nn.Linear(in_features=1024*8*8, out_features=2048))
         layers.append(nn.ReLU())
-        layers.append(nn.Dropout(0.5))
+        #layers.append(nn.Dropout(0.5))
         layers.append(nn.BatchNorm1d(2048))
 
         layers.append(nn.Linear(in_features=2048, out_features=100))
@@ -136,6 +136,8 @@ for epoch in range(1,num_epochs+1):
     train_acc_arr = np.zeros(0)
     test_loss_arr = np.zeros(0)
     test_acc_arr = np.zeros(0)
+
+    N.train()
 
     # iterate over some of the train dateset
     for i in range(1000):
