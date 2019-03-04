@@ -101,7 +101,7 @@ class MyNetwork(nn.Module):
 
         layers.append(nn.Linear(in_features=1024*8*8, out_features=2048))
         layers.append(nn.ReLU())
-        #layers.append(nn.Dropout(0.5))
+        layers.append(nn.Dropout(0.5))
         layers.append(nn.BatchNorm1d(2048))
 
         layers.append(nn.Linear(in_features=2048, out_features=100))
@@ -123,7 +123,7 @@ num_epochs = 1000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
-open('results.txt','w').close()
+open('results1.txt','w').close()
 
 
 for epoch in range(1,num_epochs+1):
@@ -167,7 +167,7 @@ for epoch in range(1,num_epochs+1):
         test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
         test_acc_arr = np.append(test_acc_arr, pred.data.eq(t.view_as(pred)).float().mean().item())
 
-    with open('results.txt','a') as results:
+    with open('results1.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} Train Acc: {:.4f} \n'.format(train_loss_arr.mean(),train_acc_arr.mean()))
         results.write('Test Loss: {:.4f} Test Acc: {:.4f} \n'.format(test_loss_arr.mean(),test_acc_arr.mean()))
