@@ -152,6 +152,8 @@ for epoch in range(1,num_epochs+1):
         train_loss_arr = np.append(train_loss_arr, loss.cpu().data)
         train_acc_arr = np.append(train_acc_arr, pred.data.eq(t.view_as(pred)).float().mean().item())
 
+    N.eval()
+
     # iterate entire test dataset
     for x,t in test_loader:
         x,t = x.to(device), t.to(device)
