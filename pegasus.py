@@ -29,7 +29,7 @@ lst = []
 for dset in [cifar_train,cifar_test]:
     indecies=[]
     for i in range(len(dset)):
-        if dset[i][1] in [7]:
+        if dset[i][1] in [2,7]:
             indecies.append(i)
     lst.append(indecies)
 
@@ -110,7 +110,7 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
-num_epochs = 100
+num_epochs = 300
 
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
