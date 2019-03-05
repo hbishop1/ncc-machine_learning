@@ -64,45 +64,44 @@ class MyNetwork(nn.Module):
         layers = nn.ModuleList()
 
         layers.append(nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(128))
+        layers.append(nn.LeakyReLU())
 
         layers.append(nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(256))
+        layers.append(nn.LeakyReLU())
 
         layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(384))
+        layers.append(nn.LeakyReLU())
 
         layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(384))
+        layers.append(nn.LeakyReLU())
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(nn.Conv2d(384, 512, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(512))
+        layers.append(nn.LeakyReLU())
 
         layers.append(nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(512))
+        layers.append(nn.LeakyReLU())
 
         layers.append(nn.Conv2d(512, 1024, kernel_size=3, stride=1, padding=1))
+        layers.append(nn.BatchNorm2d(1024)) 
         layers.append(nn.LeakyReLU())
-        layers.append(nn.BatchNorm2d(1024))     
 
         layers.append(nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1))
-        layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(1024))
+        layers.append(nn.LeakyReLU())
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
 
         layers.append(nn.Linear(in_features=1024*8*8, out_features=2048))
-        layers.append(nn.ReLU())
-        layers.append(nn.Dropout(0.5))
         layers.append(nn.BatchNorm1d(2048))
+        layers.append(nn.ReLU())
 
         layers.append(nn.Linear(in_features=2048, out_features=100))
 
