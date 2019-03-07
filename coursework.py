@@ -66,35 +66,43 @@ class MyNetwork(nn.Module):
         layers.append(nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(128))
+        layers.append(nn.Dropout(0.1))
 
         layers.append(nn.Conv2d(128, 256, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(256))
+        layers.append(nn.Dropout(0.1))
 
         layers.append(nn.Conv2d(256, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(384))
+        layers.append(nn.Dropout(0.1))
 
         layers.append(nn.Conv2d(384, 384, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(384))
+        layers.append(nn.Dropout(0.1))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(nn.Conv2d(384, 512, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(512))
+        layers.append(nn.Dropout(0.1))
 
         layers.append(nn.Conv2d(512, 512, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(512))
+        layers.append(nn.Dropout(0.1))
 
         layers.append(nn.Conv2d(512, 1024, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
-        layers.append(nn.BatchNorm2d(1024))     
+        layers.append(nn.BatchNorm2d(1024))
+        layers.append(nn.Dropout(0.1))     
 
         layers.append(nn.Conv2d(1024, 1024, kernel_size=3, stride=1, padding=1))
         layers.append(nn.LeakyReLU())
         layers.append(nn.BatchNorm2d(1024))
+        layers.append(nn.Dropout(0.1))
         layers.append(nn.MaxPool2d(kernel_size=2, stride=2, padding=0))
 
         layers.append(Flatten())
@@ -118,7 +126,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.000003, weight_decay=0.005)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.00001, weight_decay=0.01)
 num_epochs = 1000
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
