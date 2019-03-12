@@ -118,7 +118,7 @@ N = MyNetwork().to(device)
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.0003, weight_decay=0.05)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.0003, weight_decay=0.005)
 num_epochs = 300
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
