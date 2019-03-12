@@ -115,6 +115,12 @@ class MyNetwork(nn.Module):
 
 N = MyNetwork().to(device)
 
+def weights_init(m):
+    if isinstance(m, nn.Conv2d):
+        nn.init.xavier_normal_(m.weight)
+
+N.apply(weights_init)
+
 print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vector(N.parameters())))
 
 # initialise the optimiser
