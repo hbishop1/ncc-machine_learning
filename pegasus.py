@@ -29,7 +29,7 @@ lst = []
 for dset in [cifar_train,cifar_test]:
     indecies=[]
     for i in range(len(dset)):
-        if dset[i][1] in [2,7]:
+        if dset[i][1] in [2]:
             indecies.append(i)
     lst.append(indecies)
 
@@ -115,11 +115,7 @@ num_epochs = 300
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
     BCE = F.binary_cross_entropy(p.view(-1, 32 * 32 * 3), x.view(-1, 32 * 32 * 3), reduction='sum')
-
-    # see Appendix B from VAE paper:
-    # Kingma and Welling. Auto-Encoding Variational Bayes. ICLR, 2014
-    # https://arxiv.org/abs/1312.6114
-    # 0.5 * sum(1 + log(sigma^2) - mu^2 - sigma^2)
+    
     KLD = -0.5 * torch.sum(1 + logvar - mu.pow(2) - logvar.exp())
 
     return BCE + KLD
