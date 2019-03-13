@@ -124,7 +124,7 @@ print('> Number of network parameters: ', len(torch.nn.utils.parameters_to_vecto
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.00005, weight_decay=0.005)
-num_epochs = 300
+num_epochs = 500
 logs = {'train_acc':[],'train_loss':[],'test_acc':[],'test_loss':[]}
 #liveplot = PlotLosses()
 
