@@ -15,30 +15,21 @@ def cycle(iterable):
         for x in iterable:
             yield x
 
-cifar_train = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
+dset = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
         torchvision.transforms.ToTensor()
     ]))
 
-cifar_test = torchvision.datasets.CIFAR10('data', train=False, download=True, transform=torchvision.transforms.Compose([
-        torchvision.transforms.ToTensor()
-    ]))
 
-lst = []
-for dset in [cifar_train,cifar_test]:
-    indecies=[]
-    for i in range(len(dset)):
-        if dset[i][1] in [2,7]:
-            indecies.append(i)
-    lst.append(indecies)
+indicies=[]
+for i in range(len(dset)):
+    if dset[i][1] in [2,7] and i%5 == 0:
+        indicies.append(i)
 
-train_dataset = torch.utils.data.Subset(cifar_train,lst[0])
-test_dataset = torch.utils.data.Subset(cifar_test,lst[1])
+train_dataset = torch.utils.data.Subset(dset,indicies)
 
 train_loader = torch.utils.data.DataLoader(train_dataset,shuffle=True, batch_size=16, drop_last=True)
-test_loader = torch.utils.data.DataLoader(test_dataset,shuffle=False, batch_size=16, drop_last=True)
 
 train_iterator = iter(cycle(train_loader))
-test_iterator = iter(cycle(train_loader))
 
 print(f'> Size of training dataset {len(train_loader.dataset)}')
 
@@ -155,21 +146,11 @@ for epoch in range(1,num_epochs+1):
 
         train_loss_arr = np.append(train_loss_arr, loss.cpu().data)
 
-    for x,t in test_loader:
-        x,t = x.to(device), t.to(device)
-
-        p, mu, logvar = N(x)
-        loss = vae_loss(p, x, mu, logvar)
-
-        test_loss_arr = np.append(test_loss_arr, loss.cpu().data)
-
     print('Train Loss: {:.4f}'.format(train_loss_arr.mean()))
-    print('Test Loss: {:.4f}'.format(test_loss_arr.mean()))
 
     with open('results_pegasus.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} \n'.format(train_loss_arr.mean()))
-        results.write('Test Loss: {:.4f} \n'.format(test_loss_arr.mean()))
 
     epoch = epoch+1
 
@@ -177,7 +158,4 @@ with torch.no_grad():
     sample = torch.randn(64, 20).to(device)
     sample = N.decode(sample).cpu()
     save_image(sample.view(64, 3, 32, 32),'pegasus.png')
-
-#for i in range(len(test_loader.dataset.test_labels)):
-#  print(class_names[test_loader.dataset.test_labels[i]] + '\t idx: ' + str(i))
 
