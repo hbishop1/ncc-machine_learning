@@ -16,8 +16,6 @@ def cycle(iterable):
             yield x
 
 cifar_train = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
-        torchvision.transforms.RandomHorizontalFlip(),
-        torchvision.transforms.RandomResizedCrop(size=32,scale=(0.5,1)),
         torchvision.transforms.ToTensor()
     ]))
 
@@ -29,7 +27,7 @@ lst = []
 for dset in [cifar_train,cifar_test]:
     indecies=[]
     for i in range(len(dset)):
-        if dset[i][1] in [2]:
+        if dset[i][1] in [7]:
             indecies.append(i)
     lst.append(indecies)
 
