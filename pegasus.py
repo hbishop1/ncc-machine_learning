@@ -27,7 +27,7 @@ lst = []
 for dset in [cifar_train,cifar_test]:
     indecies=[]
     for i in range(len(dset)):
-        if dset[i][1] in [7]:
+        if dset[i][1] in [2,7]:
             indecies.append(i)
     lst.append(indecies)
 
