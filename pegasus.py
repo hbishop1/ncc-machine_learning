@@ -43,13 +43,13 @@ class VAE(nn.Module):
         self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1)
         self.batch1 = nn.BatchNorm2d(32)
 
-        self.conv2 = nn.Conv2d(32, 64, kernel_size=3, stride=2, padding=1)
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=2, stride=2, padding=0)
         self.batch2 = nn.BatchNorm2d(64)
 
-        self.conv3 = nn.Conv2d(64, 128, kernel_size=3, stride=2, padding=1)
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=2, stride=2, padding=0)
         self.batch3 = nn.BatchNorm2d(128)
 
-        self.conv4 = nn.Conv2d(128, 128, kernel_size=3, stride=2, padding=1)
+        self.conv4 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
         self.batch4 = nn.BatchNorm2d(128)
 
         self.fc1 = nn.Linear(4 * 4 * 128, intermediate_size)
