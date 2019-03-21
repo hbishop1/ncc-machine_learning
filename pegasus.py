@@ -63,13 +63,13 @@ class VAE(nn.Module):
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
         self.batch6 = nn.BatchNorm1d(intermediate_size)
 
-        self.fc4 = nn.Linear(intermediate_size, 4 * 4 * 64)
-        self.batch7 = nn.BatchNorm1d(4*4*64)
+        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 64)
+        self.batch7 = nn.BatchNorm1d(16*16*64)
 
-        self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=2, stride=2, padding=0)
+        self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=3, stride=1, padding=1)
         self.batch8 = nn.BatchNorm2d(64)
 
-        self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=2, stride=2, padding=0)
+        self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
         self.batch9 = nn.BatchNorm2d(128)
 
         self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
