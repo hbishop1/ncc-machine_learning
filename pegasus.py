@@ -97,7 +97,7 @@ class VAE(nn.Module):
     def decode(self, z):
         h3  = self.batch6(F.relu(self.fc3(z)))
         out = self.batch7(F.relu(self.fc4(h3)))
-        out = out.view(out.size(0), 64, 4, 4)
+        out = out.view(out.size(0), 64, 16, 16)
         out = self.batch8(F.relu(self.deconv1(out)))
         out = self.batch9(F.relu(self.deconv2(out)))
         out = self.batch10(F.relu(self.deconv3(out)))
