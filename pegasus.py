@@ -155,7 +155,7 @@ for epoch in range(1,num_epochs+1):
     epoch = epoch+1
 
 with torch.no_grad():
-    sample = torch.randn(64, 20).to(device)
+    sample = torch.randn(64, 10).to(device)
     sample = N.decode(sample).cpu()
     save_image(sample.view(64, 3, 32, 32),'pegasus.png')
 
