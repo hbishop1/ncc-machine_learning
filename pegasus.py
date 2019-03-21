@@ -40,16 +40,19 @@ class VAE(nn.Module):
 
 
         # encoder
-        self.conv1 = nn.Conv2d(3, 128, kernel_size=3, stride=1, padding=1)
-        self.batch1 = nn.BatchNorm2d(128)
-        self.conv2 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
-        self.batch2 = nn.BatchNorm2d(128)
-        self.conv3 = nn.Conv2d(128, 64, kernel_size=3, stride=1, padding=1)
-        self.batch3 = nn.BatchNorm2d(64)
-        self.conv4 = nn.Conv2d(64, 64, kernel_size=3, stride=1, padding=1)
-        self.batch4 = nn.BatchNorm2d(64)
-        self.pool = nn.MaxPool2d(kernel_size=2, stride=2, padding=0)
-        self.fc1 = nn.Linear(8 * 8 * 64, intermediate_size)
+        self.conv1 = nn.Conv2d(3, 32, kernel_size=3, stride=1, padding=1)
+        self.batch1 = nn.BatchNorm2d(32)
+
+        self.conv2 = nn.Conv2d(32, 64, kernel_size=2, stride=2, padding=0)
+        self.batch2 = nn.BatchNorm2d(64)
+
+        self.conv3 = nn.Conv2d(64, 128, kernel_size=2, stride=2, padding=0)
+        self.batch3 = nn.BatchNorm2d(128)
+
+        self.conv4 = nn.Conv2d(128, 128, kernel_size=2, stride=2, padding=0)
+        self.batch4 = nn.BatchNorm2d(128)
+
+        self.fc1 = nn.Linear(4 * 4 * 128, intermediate_size)
         self.batch5 = nn.BatchNorm1d(intermediate_size)
 
         # latent space
@@ -59,22 +62,29 @@ class VAE(nn.Module):
         # decoder
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
         self.batch6 = nn.BatchNorm1d(intermediate_size)
-        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 64)
-        self.batch7 = nn.BatchNorm1d(16*16*64)
-        self.deconv1 = nn.ConvTranspose2d(64, 64, kernel_size=3, stride=1, padding=1)
-        self.batch8 = nn.BatchNorm2d(64)
-        self.deconv2 = nn.ConvTranspose2d(64, 128, kernel_size=3, stride=1, padding=1)
-        self.batch9 = nn.BatchNorm2d(128)
-        self.deconv3 = nn.ConvTranspose2d(128, 128, kernel_size=2, stride=2, padding=0)
-        self.batch10 = nn.BatchNorm2d(128)
-        self.conv5 = nn.Conv2d(128, 3, kernel_size=3, stride=1, padding=1)
+
+        self.fc4 = nn.Linear(intermediate_size, 4 * 4 * 128)
+        self.batch7 = nn.BatchNorm1d(4*4*128)
+
+        self.up1 = nn.UpsamplingNearest2d(scale_factor=2)
+        self.deconv1 = nn.ConvTranspose2d(128, 128, kernel_size=3, stride=1, padding=1)
+        self.batch8 = nn.BatchNorm2d(128)
+
+        self.up2 = nn.UpsamplingNearest2d(scale_factor=2)
+        self.deconv2 = nn.ConvTranspose2d(128, 64, kernel_size=3, stride=1, padding=1)
+        self.batch9 = nn.BatchNorm2d(64)
+
+        self.up3 = nn.UpsamplingNearest2d(scale_factor=2)
+        self.deconv3 = nn.ConvTranspose2d(64, 32, kernel_size=3, stride=1, padding=1)
+        self.batch10 = nn.BatchNorm2d(32)
+
+        self.conv5 = nn.Conv2d(32, 3, kernel_size=3, stride=1, padding=1)
 
     def encode(self, x):
         out = self.batch1(F.relu(self.conv1(x)))
         out = self.batch2(F.relu(self.conv2(out)))
         out = self.batch3(F.relu(self.conv3(out)))
         out = self.batch4(F.relu(self.conv4(out)))
-        out = self.pool(out)
         out = out.view(out.size(0), -1)
         h1  = self.batch5(F.relu(self.fc1(out)))
         return self.fc21(h1), self.fc22(h1)
@@ -90,10 +100,10 @@ class VAE(nn.Module):
     def decode(self, z):
         h3  = self.batch6(F.relu(self.fc3(z)))
         out = self.batch7(F.relu(self.fc4(h3)))
-        out = out.view(out.size(0), 64, 16, 16)
-        out = self.batch8(F.relu(self.deconv1(out)))
-        out = self.batch9(F.relu(self.deconv2(out)))
-        out = self.batch10(F.relu(self.deconv3(out)))
+        out = out.view(out.size(0), 128, 4, 4)
+        out = self.batch8(F.relu(self.deconv1(self.up1(out))))
+        out = self.batch9(F.relu(self.deconv2(self.up1(out))))
+        out = self.batch10(F.relu(self.deconv3(self.up1(out))))
         out = torch.sigmoid(self.conv5(out))
         return out
 
