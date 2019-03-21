@@ -118,7 +118,7 @@ N = VAE().to(device)
 print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(N.parameters()))}')
 
 # initialise the optimiser
-optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
+optimiser = torch.optim.Adam(N.parameters(), lr=0.005)
 num_epochs = 300
 
 # VAE loss has a reconstruction term and a KL divergence term summed over all elements and the batch
