@@ -22,7 +22,7 @@ dset = torchvision.datasets.CIFAR10('data', train=True, download=True, transform
 
 indicies=[]
 for i in range(len(dset)):
-    if dset[i][1] in [2,7] and i%5 == 0:
+    if dset[i][1] in [2,7] and i%50 == 0:
         indicies.append(i)
 
 train_dataset = torch.utils.data.Subset(dset,indicies)
@@ -119,7 +119,7 @@ def vae_loss(p, x, mu, logvar):
 
     return BCE + KLD
 
-open('results_pegasus.txt','w').close()
+open('results_pegasus2.txt','w').close()
 
 # training loop, feel free to also train on the test dataset if you like
 for epoch in range(1,num_epochs+1):
@@ -148,7 +148,7 @@ for epoch in range(1,num_epochs+1):
 
     print('Train Loss: {:.4f}'.format(train_loss_arr.mean()))
 
-    with open('results_pegasus.txt','a') as results:
+    with open('results_pegasus2.txt','a') as results:
         results.write('Epoch {}/{} \n'.format(epoch,num_epochs))
         results.write('Train Loss: {:.4f} \n'.format(train_loss_arr.mean()))
 
@@ -157,5 +157,5 @@ for epoch in range(1,num_epochs+1):
 with torch.no_grad():
     sample = torch.randn(64, 10).to(device)
     sample = N.decode(sample).cpu()
-    save_image(sample.view(64, 3, 32, 32),'pegasus.png')
+    save_image(sample.view(64, 3, 32, 32),'pegasus2.png')
 
