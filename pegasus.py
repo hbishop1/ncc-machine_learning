@@ -35,7 +35,7 @@ print(f'> Size of training dataset {len(train_loader.dataset)}')
 
 
 class VAE(nn.Module):
-    def __init__(self, intermediate_size=256, hidden_size=40):
+    def __init__(self, intermediate_size=512, hidden_size=100):
         super(VAE, self).__init__()
 
 
@@ -162,7 +162,7 @@ for epoch in range(1,num_epochs+1):
     epoch = epoch+1
 
 with torch.no_grad():
-    sample = torch.randn(64, 40).to(device)
+    sample = torch.randn(64, 100).to(device)
     sample = N.decode(sample).cpu()
     save_image(sample.view(64, 3, 32, 32),'pegasus2.png')
 
