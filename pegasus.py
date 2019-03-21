@@ -35,7 +35,7 @@ print(f'> Size of training dataset {len(train_loader.dataset)}')
 
 
 class VAE(nn.Module):
-    def __init__(self, intermediate_size=512, hidden_size=40):
+    def __init__(self, intermediate_size=512, hidden_size=100):
         super(VAE, self).__init__()
 
 
