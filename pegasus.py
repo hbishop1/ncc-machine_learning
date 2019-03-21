@@ -22,7 +22,7 @@ dset = torchvision.datasets.CIFAR10('data', train=True, download=True, transform
 
 indicies=[]
 for i in range(len(dset)):
-    if dset[i][1] in [2,7] and i%50 == 0:
+    if dset[i][1] in [2,7]:
         indicies.append(i)
 
 train_dataset = torch.utils.data.Subset(dset,indicies)
