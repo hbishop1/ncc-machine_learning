@@ -35,7 +35,7 @@ print(f'> Size of training dataset {len(train_loader.dataset)}')
 
 
 class VAE(nn.Module):
-    def __init__(self, intermediate_size=512, hidden_size=100):
+    def __init__(self, intermediate_size=256, hidden_size=20):
         super(VAE, self).__init__()
 
 
@@ -49,10 +49,10 @@ class VAE(nn.Module):
         self.conv3 = nn.Conv2d(256, 256, kernel_size=2, stride=2, padding=0)
         self.batch3 = nn.BatchNorm2d(256)
 
-        self.conv4 = nn.Conv2d(256, 512, kernel_size=2, stride=2, padding=0)
-        self.batch4 = nn.BatchNorm2d(512)
+        self.conv4 = nn.Conv2d(256, 128, kernel_size=2, stride=2, padding=0)
+        self.batch4 = nn.BatchNorm2d(128)
 
-        self.fc1 = nn.Linear(4 * 4 * 512, intermediate_size)
+        self.fc1 = nn.Linear(4 * 4 * 128, intermediate_size)
         self.batch5 = nn.BatchNorm1d(intermediate_size)
 
         # latent space
@@ -63,10 +63,10 @@ class VAE(nn.Module):
         self.fc3 = nn.Linear(hidden_size, intermediate_size)
         self.batch6 = nn.BatchNorm1d(intermediate_size)
 
-        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 512)
-        self.batch7 = nn.BatchNorm1d(16*16*512)
+        self.fc4 = nn.Linear(intermediate_size, 16 * 16 * 128)
+        self.batch7 = nn.BatchNorm1d(16*16*128)
 
-        self.deconv1 = nn.ConvTranspose2d(512, 256, kernel_size=3, stride=1, padding=1)
+        self.deconv1 = nn.ConvTranspose2d(128, 256, kernel_size=3, stride=1, padding=1)
         self.batch8 = nn.BatchNorm2d(256)
 
         self.deconv2 = nn.ConvTranspose2d(256, 256, kernel_size=3, stride=1, padding=1)
@@ -97,7 +97,7 @@ class VAE(nn.Module):
     def decode(self, z):
         h3  = self.batch6(F.relu(self.fc3(z)))
         out = self.batch7(F.relu(self.fc4(h3)))
-        out = out.view(out.size(0), 512, 16, 16)
+        out = out.view(out.size(0), 128, 16, 16)
         out = self.batch8(F.relu(self.deconv1(out)))
         out = self.batch9(F.relu(self.deconv2(out)))
         out = self.batch10(F.relu(self.deconv3(out)))
@@ -116,7 +116,7 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
-num_epochs = 300
+num_epochs = 200
 
 # VAE loss has a reconstruct16ion term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
@@ -162,7 +162,7 @@ for epoch in range(1,num_epochs+1):
     epoch = epoch+1
 
 with torch.no_grad():
-    sample = torch.randn(64, 100).to(device)
+    sample = torch.randn(64, 20).to(device)
     sample = N.decode(sample).cpu()
     save_image(sample.view(64, 3, 32, 32),'pegasus2.png')
 
