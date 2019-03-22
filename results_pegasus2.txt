@@ -1,0 +1,400 @@
+Epoch 1/200 
+Train Loss: 31102.2836 
+Epoch 2/200 
+Train Loss: 30468.3961 
+Epoch 3/200 
+Train Loss: 30377.8315 
+Epoch 4/200 
+Train Loss: 30304.4855 
+Epoch 5/200 
+Train Loss: 30245.9911 
+Epoch 6/200 
+Train Loss: 30204.2550 
+Epoch 7/200 
+Train Loss: 30155.5126 
+Epoch 8/200 
+Train Loss: 30156.6774 
+Epoch 9/200 
+Train Loss: 30102.7817 
+Epoch 10/200 
+Train Loss: 30098.4379 
+Epoch 11/200 
+Train Loss: 30083.1100 
+Epoch 12/200 
+Train Loss: 30026.8812 
+Epoch 13/200 
+Train Loss: 30009.2832 
+Epoch 14/200 
+Train Loss: 29956.8287 
+Epoch 15/200 
+Train Loss: 29975.3604 
+Epoch 16/200 
+Train Loss: 29931.2058 
+Epoch 17/200 
+Train Loss: 29893.8326 
+Epoch 18/200 
+Train Loss: 29894.0471 
+Epoch 19/200 
+Train Loss: 29866.7383 
+Epoch 20/200 
+Train Loss: 29848.9434 
+Epoch 21/200 
+Train Loss: 29826.4224 
+Epoch 22/200 
+Train Loss: 29814.0730 
+Epoch 23/200 
+Train Loss: 29803.9618 
+Epoch 24/200 
+Train Loss: 29779.8304 
+Epoch 25/200 
+Train Loss: 29758.5346 
+Epoch 26/200 
+Train Loss: 29741.4692 
+Epoch 27/200 
+Train Loss: 29720.1211 
+Epoch 28/200 
+Train Loss: 29746.5534 
+Epoch 29/200 
+Train Loss: 29703.8625 
+Epoch 30/200 
+Train Loss: 29693.8714 
+Epoch 31/200 
+Train Loss: 29678.8488 
+Epoch 32/200 
+Train Loss: 29679.6847 
+Epoch 33/200 
+Train Loss: 29653.9084 
+Epoch 34/200 
+Train Loss: 29649.0505 
+Epoch 35/200 
+Train Loss: 29647.2794 
+Epoch 36/200 
+Train Loss: 29677.0287 
+Epoch 37/200 
+Train Loss: 29589.3402 
+Epoch 38/200 
+Train Loss: 29586.0416 
+Epoch 39/200 
+Train Loss: 29628.0236 
+Epoch 40/200 
+Train Loss: 29585.0601 
+Epoch 41/200 
+Train Loss: 29568.4691 
+Epoch 42/200 
+Train Loss: 29578.0042 
+Epoch 43/200 
+Train Loss: 29569.1174 
+Epoch 44/200 
+Train Loss: 29574.3176 
+Epoch 45/200 
+Train Loss: 29538.4543 
+Epoch 46/200 
+Train Loss: 29533.3538 
+Epoch 47/200 
+Train Loss: 29521.6291 
+Epoch 48/200 
+Train Loss: 29566.3379 
+Epoch 49/200 
+Train Loss: 29492.8651 
+Epoch 50/200 
+Train Loss: 29520.9808 
+Epoch 51/200 
+Train Loss: 29516.0143 
+Epoch 52/200 
+Train Loss: 29467.8733 
+Epoch 53/200 
+Train Loss: 29510.3613 
+Epoch 54/200 
+Train Loss: 29476.0451 
+Epoch 55/200 
+Train Loss: 29499.5057 
+Epoch 56/200 
+Train Loss: 29470.0438 
+Epoch 57/200 
+Train Loss: 29464.9192 
+Epoch 58/200 
+Train Loss: 29448.8320 
+Epoch 59/200 
+Train Loss: 29443.2489 
+Epoch 60/200 
+Train Loss: 29473.2643 
+Epoch 61/200 
+Train Loss: 29454.9525 
+Epoch 62/200 
+Train Loss: 29421.4624 
+Epoch 63/200 
+Train Loss: 29447.5363 
+Epoch 64/200 
+Train Loss: 29422.7427 
+Epoch 65/200 
+Train Loss: 29420.5586 
+Epoch 66/200 
+Train Loss: 29423.8008 
+Epoch 67/200 
+Train Loss: 29403.2002 
+Epoch 68/200 
+Train Loss: 29416.4196 
+Epoch 69/200 
+Train Loss: 29367.3902 
+Epoch 70/200 
+Train Loss: 29414.6161 
+Epoch 71/200 
+Train Loss: 29393.4903 
+Epoch 72/200 
+Train Loss: 29385.2477 
+Epoch 73/200 
+Train Loss: 29371.6117 
+Epoch 74/200 
+Train Loss: 29374.1289 
+Epoch 75/200 
+Train Loss: 29387.6308 
+Epoch 76/200 
+Train Loss: 29360.1142 
+Epoch 77/200 
+Train Loss: 29362.3572 
+Epoch 78/200 
+Train Loss: 29373.1856 
+Epoch 79/200 
+Train Loss: 29322.8862 
+Epoch 80/200 
+Train Loss: 29368.3036 
+Epoch 81/200 
+Train Loss: 29366.8386 
+Epoch 82/200 
+Train Loss: 29312.7771 
+Epoch 83/200 
+Train Loss: 29334.0014 
+Epoch 84/200 
+Train Loss: 29345.0350 
+Epoch 85/200 
+Train Loss: 29327.9696 
+Epoch 86/200 
+Train Loss: 29344.2306 
+Epoch 87/200 
+Train Loss: 29295.6509 
+Epoch 88/200 
+Train Loss: 29346.7588 
+Epoch 89/200 
+Train Loss: 29293.5992 
+Epoch 90/200 
+Train Loss: 29319.9998 
+Epoch 91/200 
+Train Loss: 29302.6603 
+Epoch 92/200 
+Train Loss: 29308.7112 
+Epoch 93/200 
+Train Loss: 29313.3956 
+Epoch 94/200 
+Train Loss: 29288.1278 
+Epoch 95/200 
+Train Loss: 29302.7841 
+Epoch 96/200 
+Train Loss: 29281.9069 
+Epoch 97/200 
+Train Loss: 29263.7543 
+Epoch 98/200 
+Train Loss: 29303.0987 
+Epoch 99/200 
+Train Loss: 29292.3324 
+Epoch 100/200 
+Train Loss: 29278.6739 
+Epoch 101/200 
+Train Loss: 29286.2446 
+Epoch 102/200 
+Train Loss: 29246.0163 
+Epoch 103/200 
+Train Loss: 29288.2027 
+Epoch 104/200 
+Train Loss: 29246.1883 
+Epoch 105/200 
+Train Loss: 29282.8899 
+Epoch 106/200 
+Train Loss: 29245.3141 
+Epoch 107/200 
+Train Loss: 29281.9057 
+Epoch 108/200 
+Train Loss: 29245.4244 
+Epoch 109/200 
+Train Loss: 29238.8601 
+Epoch 110/200 
+Train Loss: 29256.7914 
+Epoch 111/200 
+Train Loss: 29221.5588 
+Epoch 112/200 
+Train Loss: 29274.0076 
+Epoch 113/200 
+Train Loss: 29237.9575 
+Epoch 114/200 
+Train Loss: 29208.2157 
+Epoch 115/200 
+Train Loss: 29248.8419 
+Epoch 116/200 
+Train Loss: 29219.5242 
+Epoch 117/200 
+Train Loss: 29256.8137 
+Epoch 118/200 
+Train Loss: 29207.3906 
+Epoch 119/200 
+Train Loss: 29243.2546 
+Epoch 120/200 
+Train Loss: 29203.0332 
+Epoch 121/200 
+Train Loss: 29221.5959 
+Epoch 122/200 
+Train Loss: 29218.2420 
+Epoch 123/200 
+Train Loss: 29203.4057 
+Epoch 124/200 
+Train Loss: 29227.6230 
+Epoch 125/200 
+Train Loss: 29207.0093 
+Epoch 126/200 
+Train Loss: 29205.8187 
+Epoch 127/200 
+Train Loss: 29197.8661 
+Epoch 128/200 
+Train Loss: 29233.2145 
+Epoch 129/200 
+Train Loss: 29155.3654 
+Epoch 130/200 
+Train Loss: 29217.5091 
+Epoch 131/200 
+Train Loss: 29195.7924 
+Epoch 132/200 
+Train Loss: 29205.0912 
+Epoch 133/200 
+Train Loss: 29186.4851 
+Epoch 134/200 
+Train Loss: 29159.6610 
+Epoch 135/200 
+Train Loss: 29205.9997 
+Epoch 136/200 
+Train Loss: 29206.3373 
+Epoch 137/200 
+Train Loss: 29144.5391 
+Epoch 138/200 
+Train Loss: 29187.4516 
+Epoch 139/200 
+Train Loss: 29192.0649 
+Epoch 140/200 
+Train Loss: 29172.6259 
+Epoch 141/200 
+Train Loss: 29180.3345 
+Epoch 142/200 
+Train Loss: 29153.5546 
+Epoch 143/200 
+Train Loss: 29172.6001 
+Epoch 144/200 
+Train Loss: 29158.6199 
+Epoch 145/200 
+Train Loss: 29177.4587 
+Epoch 146/200 
+Train Loss: 29139.1818 
+Epoch 147/200 
+Train Loss: 29178.6027 
+Epoch 148/200 
+Train Loss: 29152.9837 
+Epoch 149/200 
+Train Loss: 29163.4394 
+Epoch 150/200 
+Train Loss: 29161.9071 
+Epoch 151/200 
+Train Loss: 29157.1007 
+Epoch 152/200 
+Train Loss: 29155.2657 
+Epoch 153/200 
+Train Loss: 29138.4144 
+Epoch 154/200 
+Train Loss: 29174.3864 
+Epoch 155/200 
+Train Loss: 29133.4464 
+Epoch 156/200 
+Train Loss: 29148.4498 
+Epoch 157/200 
+Train Loss: 29129.9771 
+Epoch 158/200 
+Train Loss: 29155.1206 
+Epoch 159/200 
+Train Loss: 29132.4487 
+Epoch 160/200 
+Train Loss: 29146.1523 
+Epoch 161/200 
+Train Loss: 29116.9973 
+Epoch 162/200 
+Train Loss: 29143.8133 
+Epoch 163/200 
+Train Loss: 29145.0727 
+Epoch 164/200 
+Train Loss: 29101.5366 
+Epoch 165/200 
+Train Loss: 29145.0148 
+Epoch 166/200 
+Train Loss: 29128.0294 
+Epoch 167/200 
+Train Loss: 29132.8055 
+Epoch 168/200 
+Train Loss: 29109.5783 
+Epoch 169/200 
+Train Loss: 29113.9192 
+Epoch 170/200 
+Train Loss: 29146.1202 
+Epoch 171/200 
+Train Loss: 29126.8457 
+Epoch 172/200 
+Train Loss: 29106.9872 
+Epoch 173/200 
+Train Loss: 29128.7325 
+Epoch 174/200 
+Train Loss: 29094.9762 
+Epoch 175/200 
+Train Loss: 29118.3350 
+Epoch 176/200 
+Train Loss: 29109.3895 
+Epoch 177/200 
+Train Loss: 29109.4788 
+Epoch 178/200 
+Train Loss: 29114.6301 
+Epoch 179/200 
+Train Loss: 29124.2941 
+Epoch 180/200 
+Train Loss: 29104.3527 
+Epoch 181/200 
+Train Loss: 29086.0651 
+Epoch 182/200 
+Train Loss: 29110.9647 
+Epoch 183/200 
+Train Loss: 29096.2594 
+Epoch 184/200 
+Train Loss: 29111.2625 
+Epoch 185/200 
+Train Loss: 29108.2439 
+Epoch 186/200 
+Train Loss: 29111.6592 
+Epoch 187/200 
+Train Loss: 29096.8514 
+Epoch 188/200 
+Train Loss: 29081.6244 
+Epoch 189/200 
+Train Loss: 29103.8271 
+Epoch 190/200 
+Train Loss: 29086.5928 
+Epoch 191/200 
+Train Loss: 29100.0942 
+Epoch 192/200 
+Train Loss: 29091.6430 
+Epoch 193/200 
+Train Loss: 29092.3269 
+Epoch 194/200 
+Train Loss: 29063.1845 
+Epoch 195/200 
+Train Loss: 29102.6885 
+Epoch 196/200 
+Train Loss: 29073.0400 
+Epoch 197/200 
+Train Loss: 29097.3161 
+Epoch 198/200 
+Train Loss: 29072.3107 
+Epoch 199/200 
+Train Loss: 29073.7181 
+Epoch 200/200 
+Train Loss: 29093.3993 
