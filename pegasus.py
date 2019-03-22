@@ -15,14 +15,19 @@ def cycle(iterable):
         for x in iterable:
             yield x
 
-dset = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
+dset_train = torchvision.datasets.CIFAR10('data', train=True, download=True, transform=torchvision.transforms.Compose([
         torchvision.transforms.ToTensor()
     ]))
 
+dset_test = torchvision.datasets.CIFAR10('data', train=False, download=True, transform=torchvision.transforms.Compose([
+        torchvision.transforms.ToTensor()
+    ]))
+
+dset = torch.utils.data.ConcatDataset([dset_test,dset_train])
 
 indicies=[]
 for i in range(len(dset)):
-    if dset[i][1] in [2,7]:
+    if dset[i][1] in [2,7] and i%50 == 0:
         indicies.append(i)
 
 train_dataset = torch.utils.data.Subset(dset,indicies)
@@ -35,7 +40,7 @@ print(f'> Size of training dataset {len(train_loader.dataset)}')
 
 
 class VAE(nn.Module):
-    def __init__(self, intermediate_size=256, hidden_size=20):
+    def __init__(self, intermediate_size=256, hidden_size=5):
         super(VAE, self).__init__()
 
 
@@ -116,7 +121,7 @@ print(f'> Number of network parameters {len(torch.nn.utils.parameters_to_vector(
 
 # initialise the optimiser
 optimiser = torch.optim.Adam(N.parameters(), lr=0.001)
-num_epochs = 200
+num_epochs = 50
 
 # VAE loss has a reconstruct16ion term and a KL divergence term summed over all elements and the batch
 def vae_loss(p, x, mu, logvar):
@@ -162,7 +167,7 @@ for epoch in range(1,num_epochs+1):
     epoch = epoch+1
 
 with torch.no_grad():
-    sample = torch.randn(64, 20).to(device)
+    sample = torch.randn(64, 5).to(device)
     sample = N.decode(sample).cpu()
     save_image(sample.view(64, 3, 32, 32),'pegasus2.png')
 
